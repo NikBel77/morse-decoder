@@ -37,10 +37,29 @@ const MORSE_TABLE = {
     '-----':  '0',
 };
 
-function decode(expr) {
-    // write your solution here
+let decode = function (expr) {
+    let world = "";
+    for (let i = 0; i < expr.length; i = i + 10) {
+        let letter = expr.substr(i, 10);
+        let encode = ""
+        if (letter == "**********") {
+            world += " ";
+            continue;
+        }
+        for (let k = 0; k <= letter.length; k = k + 2) {
+            let code = letter.substr(k, 2);
+            if (code == "10") {
+                encode += ".";
+            }
+            else if (code == "11") {
+                encode += "-";
+            }
+        }
+        world += MORSE_TABLE[encode];
+        encode = "";
+    }
+    return(world);
 }
-
 module.exports = {
     decode
 }
